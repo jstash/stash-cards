@@ -3,7 +3,7 @@ var config = require('./config'),
 
 module.exports = function() {
 
-    var db = mongoose.connect();
+    var db = mongoose.connect(config.db);
 
     // Require models here.
 
