@@ -2,7 +2,7 @@
   "name": "stash-cards",
   "version": "0.1.0",
   "description": "A flashcard-based memorization tool",
-  "main": "index.js",
+  "main": "server.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
@@ -24,5 +24,9 @@
     "method-override": "^2.3.5",
     "mongoose": "^4.1.7",
     "morgan": "^1.6.1"
+  },
+  "devDependencies": {
+    "should": "~4.0.4",
+    "supertest": "~0.13.0"
   }
 }

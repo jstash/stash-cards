@@ -1,3 +1,5 @@
+'use strict';
+
 var express = require('./config/express.js'),
     mongoose = require('./config/mongoose.js');
 
@@ -7,4 +9,4 @@ var app = express(db);
 
 app.listen(3000);
 
-console.log('Server started');
+console.log('Server started on port 3000');
