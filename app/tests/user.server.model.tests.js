@@ -26,10 +26,13 @@ describe('User Model Unit Tests:', function() {
         });
 
         it('Should not be able to save without name', function() {
-
-            delete user.name;
-            user.save(function(err) {
+            user2 = new User({
+                email: user.email,
+                password: user.password
+            });
+            user2.save(function(err) {
                 should.exist(err);
+                done();
             });
         });
 
@@ -142,8 +145,11 @@ describe('User Model Unit Tests:', function() {
                 done();
                     });
         });
+    });
 
-        it('Should be able to authenticate successfully when the password is 128 characters', function(done) {
+    describe('Testing authentication', function () {
+
+        it('Should authenticate successfully when password is 128 characters', function(done) {
             var pass = 'Passw0rd012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789';
             user.password=pass;
             user.save(function(err) {
@@ -152,7 +158,18 @@ describe('User Model Unit Tests:', function() {
                 done();
             });
         });
+
+        it('Should not authenticate successfully for incorrect password', function(done) {
+            var pass = 'Passw0rd';
+            user.password=pass;
+            user.save(function(err) {
+
+                user.authenticate('passw0rd').should.be.false;
+                done();
+            });
+        });
     });
+
 
     afterEach(function (done) {
 

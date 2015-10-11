@@ -4,12 +4,12 @@ var mongoose = require('mongoose');
 
 var CardSchema = new mongoose.Schema({
 
-    name: {
-        type: String,
-        index: true
-    },
+    name: String,
     description: String,
-    sides: Object
+    sides: {
+        type: Object,
+        required: true
+    }
 });
 
 mongoose.model('Card', CardSchema);
