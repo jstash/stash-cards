@@ -15,11 +15,11 @@ exports.createDeck = function(req, res, next) {
 };
 
 exports.readDeck = function (req, res, next) {
-    User.findOne({_id: id }, function(err, user) {
+    User.findOne({_id: id }, function(err, deck) {
         if(err) {
             return next(err);
         } else {
-            req.user = user;
+            req.deck = deck;
             next();
         }
     });
@@ -30,17 +30,17 @@ exports.readDeckList = function(req, res, next) {
         if(err) {
             return next(err);
         } else {
-            res.json(users);
+            res.json(decks);
         }
     });
 };
 
 exports.updateDeck = function(req, res, next) {
-    Deck.findByIdAndUpdate(req.user.id, req.body, function(err, user) {
+    Deck.findByIdAndUpdate(req.user.id, req.body, function(err, deck) {
         if(err) {
             return next(err);
         } else {
-            res.json(user);
+            res.json(deck);
         }
     });
 };

@@ -9,7 +9,7 @@ exports.createCard = function(req, res, next) {
         if(err) {
             return next(err);
         } else {
-            res.json(user);
+            res.json(card);
         }
     });
 };
@@ -30,17 +30,17 @@ exports.readCardList = function(req, res, next) {
         if(err) {
             return next(err);
         } else {
-            res.json(users);
+            res.json(cards);
         }
     });
 };
 
 exports.updateCard = function(req, res, next) {
-    Card.findByIdAndUpdate(req.card.id, req.body, function(err, user) {
+    Card.findByIdAndUpdate(req.card.id, req.body, function(err, card) {
         if(err) {
             return next(err);
         } else {
-            res.json(user);
+            res.json(card);
         }
     });
 };

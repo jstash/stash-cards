@@ -1,15 +1,17 @@
 'use strict';
 
-var mongoose = require('mongoose');
+var mongoose = require('mongoose'),
+    Schema = mongoose.Schema;
 
 var DeckSchema = new mongoose.Schema({
 
     name: {
         type: String,
-        index: true
+        index: true,
+        required: true
     },
     description: String,
-    cards: [{type: mongoose.Schema.Types.ObjectId, ref: 'Card'}]
+    cards: [{type: Schema.ObjectId, ref: 'Card'}]
 });
 
 mongoose.model('Deck', DeckSchema);
