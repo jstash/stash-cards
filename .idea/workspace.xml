@@ -1,18 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="216bbc6a-0821-46a4-a2f8-a400e4ff2f4f" name="Default" comment="Added .idea folder to git ignore. Added db to mongoose configuration.">
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/tests/card.server.controller.tests.js" afterPath="$PROJECT_DIR$/app/tests/card.server.controller.tests.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/tests/card.server.model.tests.js" afterPath="$PROJECT_DIR$/app/tests/card.server.model.tests.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/controllers/cards.server.controller.js" afterPath="$PROJECT_DIR$/app/controllers/cards.server.controller.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/tests/deck.server.controller.tests.js" afterPath="$PROJECT_DIR$/app/tests/deck.server.controller.tests.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/models/deck.server.model.js" afterPath="$PROJECT_DIR$/app/models/deck.server.model.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/tests/deck.server.model.tests.js" afterPath="$PROJECT_DIR$/app/tests/deck.server.model.tests.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/controllers/decks.server.controller.js" afterPath="$PROJECT_DIR$/app/controllers/decks.server.controller.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/tests/user.server.controller.tests.js" afterPath="$PROJECT_DIR$/app/tests/user.server.controller.tests.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/tests/user.server.model.tests.js" afterPath="$PROJECT_DIR$/app/tests/user.server.model.tests.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-    </list>
+    <list default="true" id="216bbc6a-0821-46a4-a2f8-a400e4ff2f4f" name="Default" comment="Added .idea folder to git ignore. Added db to mongoose configuration." />
     <ignored path="stash-cards.iws" />
     <ignored path=".idea/workspace.xml" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
