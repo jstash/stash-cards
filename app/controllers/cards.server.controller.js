@@ -3,24 +3,25 @@
 var Card = require('mongoose').model('Card');
 
 exports.createCard = function(req, res, next) {
-    var user = new Card(req.body);
+    var card = new Card(req.body);
 
-    user.save(function(err) {
+    card.save(function(err) {
         if(err) {
             return next(err);
         } else {
+            console.log('here is your card.');
             res.json(card);
         }
     });
 };
 
 exports.readCard = function (req, res, next) {
-    Card.findOne({_id: id }, function(err, card) {
+
+    Card.findOne({_id: req.params.cardId }, function(err, card) {
         if(err) {
             return next(err);
         } else {
-            req.card = card;
-            next();
+            res.json(card);
         }
     });
 };
@@ -36,7 +37,7 @@ exports.readCardList = function(req, res, next) {
 };
 
 exports.updateCard = function(req, res, next) {
-    Card.findByIdAndUpdate(req.card.id, req.body, function(err, card) {
+    Card.findByIdAndUpdate(req.params.cardId, req.body, function(err, card) {
         if(err) {
             return next(err);
         } else {
@@ -46,7 +47,7 @@ exports.updateCard = function(req, res, next) {
 };
 
 exports.deleteCard = function(req, res, next) {
-    Card.remove({ _id: req.body.id }, function(err) {
+    Card.remove({ _id: req.params.cardId }, function(err) {
         if (err) {
             return next(err);
         }
