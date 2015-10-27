@@ -9,7 +9,6 @@ exports.createCard = function(req, res, next) {
         if(err) {
             return next(err);
         } else {
-            console.log('here is your card.');
             res.json(card);
         }
     });

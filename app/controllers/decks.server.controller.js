@@ -3,30 +3,30 @@
 var Deck = require('mongoose').model('Deck');
 
 exports.createDeck = function(req, res, next) {
-    var user = new User(req.body);
+    var deck = new Deck(req.body);
 
-    user.save(function(err) {
+    deck.save(function(err) {
         if(err) {
             return next(err);
         } else {
-            res.json(user);
+            res.json(deck);
         }
     });
 };
 
 exports.readDeck = function (req, res, next) {
-    User.findOne({_id: id }, function(err, deck) {
+
+    Deck.findOne({_id: req.params.cardId }, function(err, deck) {
         if(err) {
             return next(err);
         } else {
-            req.deck = deck;
-            next();
+            res.json(deck);
         }
     });
 };
 
 exports.readDeckList = function(req, res, next) {
-    User.find({}, function(err, users) {
+    Deck.find({}, function(err, decks) {
         if(err) {
             return next(err);
         } else {
@@ -36,7 +36,7 @@ exports.readDeckList = function(req, res, next) {
 };
 
 exports.updateDeck = function(req, res, next) {
-    Deck.findByIdAndUpdate(req.user.id, req.body, function(err, deck) {
+    Deck.findByIdAndUpdate(req.params.deckId, req.body, function(err, deck) {
         if(err) {
             return next(err);
         } else {
@@ -46,7 +46,7 @@ exports.updateDeck = function(req, res, next) {
 };
 
 exports.deleteDeck = function(req, res, next) {
-    Deck.remove({ _id: req.body.id }, function(err) {
+    Deck.remove({ _id: req.params.deckId }, function(err) {
         if (err) {
             return next(err);
         }
