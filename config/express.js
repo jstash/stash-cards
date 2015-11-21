@@ -30,7 +30,6 @@ module.exports = function () {
     app.set('views', './app/views');
     app.set('view engine', 'ejs');
 
-    require('../app/routes/card.server.routes.js')(app);
     require('../app/routes/deck.server.routes.js')(app);
     require('../app/routes/user.server.routes.js')(app);
 

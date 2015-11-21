@@ -3,17 +3,22 @@
 var mongoose = require('mongoose'),
     Schema = mongoose.Schema;
 
-var DeckSchema = new mongoose.Schema({
+var Card = new mongoose.Schema({
 
-    name: {
-        type: String,
-        index: true,
-        required: true
-    },
-    description: String,
-    cards: [{type: Schema.ObjectId, ref: 'Card'}]
+    front: String,
+    back: String,
+    reviewCount: Number,
+    correctCount: Number,
+    lastReviewed: Date
 });
 
-mongoose.model('Deck', DeckSchema);
+var Deck = new mongoose.Schema({
 
-// Stores an indeterminate amount of sides in 'sides'.
+    owner: [{type: Schema.ObjectId, ref: 'User'}],
+    title: String,
+    description: String,
+    public: Boolean,
+    cards: [Card]
+});
+
+mongoose.model('Deck', Deck);
