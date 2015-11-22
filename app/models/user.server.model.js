@@ -3,7 +3,7 @@
 var mongoose = require('mongoose'),
     crypto = require('crypto');
 
-var UserSchema = new mongoose.Schema({
+var User = new mongoose.Schema({
 
     name: {
         type: String,
@@ -35,11 +35,11 @@ var UserSchema = new mongoose.Schema({
     }
 });
 
-UserSchema.methods.authenticate = function(password) {
+User.methods.authenticate = function(password) {
     return this.password === this.hashPassword(password);
 };
 
-UserSchema.pre('save', function(next) {
+User.pre('save', function(next) {
     if(this.password) {
         this.salt = new Buffer(crypto.randomBytes(16)).toString('base64');
         this.password = this.hashPassword(this.password);
@@ -47,8 +47,8 @@ UserSchema.pre('save', function(next) {
     next();
 });
 
-UserSchema.methods.hashPassword = function(password) {
+User.methods.hashPassword = function(password) {
     return crypto.pbkdf2Sync(password, this.salt, 10000, 64).toString('base64');
 };
 
-mongoose.model('User', UserSchema);
+mongoose.model('User', User);

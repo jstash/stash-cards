@@ -1,11 +1,13 @@
 'use strict';
 
-var express = require('./config/express.js'),
-    mongoose = require('./config/mongoose.js');
+var express = require('./config/express'),
+    mongoose = require('./config/mongoose'),
+    passport = require('./config/passport');
 
 // Creates the http server
 var db = mongoose();
 var app = express(db);
+var passport = passport();
 
 
 app.listen(3000);

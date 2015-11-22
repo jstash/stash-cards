@@ -1,6 +1,7 @@
 'use strict';
 
-var User = require('mongoose').model('User');
+var User = require('mongoose').model('User'),
+    passport = require('passport');
 
 exports.createUser = function(req, res, next) {
     var user = new User(req.body);
@@ -54,4 +55,59 @@ exports.deleteUser = function(req, res, next) {
             next();
         }
     });
+};
+
+exports.renderSignin = function(req, res, next) {
+    if (!req.user) {
+        res.render('signin', {
+            title: 'Sign in here',
+            messages: req.flash('error') || req.flash('info')
+        });
+    } else {
+        return res.redirect('/');
+    }
+};
+
+exports.renderSignup = function(req, res, next) {
+    if (!req.user) {
+        res.render('signup', {
+            title: 'Sign up today',
+            messages: req.flash('error')
+        });
+    } else {
+    return res.redirect('/');
+} };
+
+exports.signup = function(req, res, next) {
+    if (!req.user) {
+        var user = new User(req.body);
+        var message = null;
+        user.provider = 'local';
+        user.save(function(err) {
+            if (err) {
+                req.flash('error', err);
+                return res.redirect('/signup');
+            }
+            req.login(user, function(err) {
+                if (err) return next(err);
+                return res.redirect('/');
+            });
+        });
+    } else {
+        return res.redirect('/');
+    }
+};
+
+exports.signout = function(req, res) {
+    req.logout();
+    res.redirect('/');
+};
+
+exports.requiresLogin = function(req, res, next) {
+    if(!req.isAuthenticated()) {
+        return res.status(401).send({
+            message: 'Please log in'
+        });
+    }
+    next();
 };
