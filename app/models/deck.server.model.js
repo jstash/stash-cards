@@ -3,7 +3,7 @@
 var mongoose = require('mongoose'),
     Schema = mongoose.Schema;
 
-var Card = new mongoose.Schema({
+var CardSchema = new mongoose.Schema({
 
     front: String,
     back: String,
@@ -12,13 +12,20 @@ var Card = new mongoose.Schema({
     lastReviewed: Date
 });
 
-var Deck = new mongoose.Schema({
+CardSchema.method.equals = function equals(card) {
+    return  card.front === this.front &&
+        card.back === this.back &&
+        card.reviewCount === this.reviewCount &&
+        card.correctCount === this.correctCount &&
+        card.lastReviewed === this.lastReviewed;
+};
 
-    owner: [{type: Schema.ObjectId, ref: 'User'}],
+var DeckSchema = new mongoose.Schema({
+
     title: String,
     description: String,
     public: Boolean,
     cards: [Card]
 });
 
-mongoose.model('Deck', Deck);
+mongoose.model('Deck', DeckSchema);

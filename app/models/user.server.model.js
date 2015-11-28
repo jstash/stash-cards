@@ -32,6 +32,9 @@ var User = new mongoose.Schema({
     },
     salt: {
         type: String
+    },
+    decks: {
+        owner: [{type: Schema.ObjectId, ref: 'Deck'}],
     }
 });
 
