@@ -2,8 +2,9 @@
 
 var mongoose = require('mongoose'),
     crypto = require('crypto');
+var Deck = mongoose.model('Deck');
 
-var User = new mongoose.Schema({
+var UserSchema = new mongoose.Schema({
 
     name: {
         type: String,
@@ -33,16 +34,14 @@ var User = new mongoose.Schema({
     salt: {
         type: String
     },
-    decks: {
-        owner: [{type: Schema.ObjectId, ref: 'Deck'}],
-    }
+    decks: [Deck.schema]
 });
 
-User.methods.authenticate = function(password) {
+UserSchema.methods.authenticate = function(password) {
     return this.password === this.hashPassword(password);
 };
 
-User.pre('save', function(next) {
+UserSchema.pre('save', function(next) {
     if(this.password) {
         this.salt = new Buffer(crypto.randomBytes(16)).toString('base64');
         this.password = this.hashPassword(this.password);
@@ -50,8 +49,8 @@ User.pre('save', function(next) {
     next();
 });
 
-User.methods.hashPassword = function(password) {
+UserSchema.methods.hashPassword = function(password) {
     return crypto.pbkdf2Sync(password, this.salt, 10000, 64).toString('base64');
 };
 
-mongoose.model('User', User);
+mongoose.model('User', UserSchema);

@@ -1,10 +1,9 @@
 'use strict';
 
-var mongoose = require('mongoose'),
-    Schema = mongoose.Schema;
+var mongoose = require('mongoose');
+var Schema = mongoose.Schema;
 
-var CardSchema = new mongoose.Schema({
-
+var CardSchema = new Schema({
     front: String,
     back: String,
     reviewCount: Number,
@@ -20,12 +19,11 @@ CardSchema.method.equals = function equals(card) {
         card.lastReviewed === this.lastReviewed;
 };
 
-var DeckSchema = new mongoose.Schema({
-
+var DeckSchema = new Schema({
     title: String,
     description: String,
     public: Boolean,
-    cards: [Card]
+    cards: [CardSchema]
 });
 
 mongoose.model('Deck', DeckSchema);

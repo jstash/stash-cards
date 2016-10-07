@@ -9,7 +9,6 @@ var db = mongoose();
 var app = express(db);
 var passport = passport();
 
-
 app.listen(3000);
 
 module.exports = app; // Allows test runner to run tests on APIs
