@@ -82,7 +82,9 @@ describe('Deck Model Unit Tests:', function() {
 
 
         });
+    });
 
+    describe('Testing the delete method', function() {
         it('Should be able to delete a deck', function (done) {
             deck.save(function (err) {
                 should.not.exist(err);

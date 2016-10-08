@@ -168,8 +168,26 @@ describe('User Model Unit Tests:', function() {
                 done();
             });
         });
-    });
+    })
 
+    describe('Testing the delete method', function() {
+        it('Should be able to delete a deck', function (done) {
+            user.save(function (err) {
+                should.not.exist(err);
+                User.find({'name':'012345'}, function(err, myUser) {
+                    should.not.exist(err);
+                    should.exist(myUser);
+                    User.remove({'name':'012345'}, function(err) {
+                        should.not.exist(err);
+                        User.count(function (err, c) {
+                            should(c).be.equal(0);
+                            done();
+                        });
+                    });
+                });
+            });
+        });
+    });
 
     afterEach(function (done) {
 
