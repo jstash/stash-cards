@@ -4,6 +4,7 @@ var User = require('mongoose').model('User'),
     passport = require('passport');
 
 exports.createUser = function(req, res, next) {
+  console.log('in createUser');
     var user = new User(req.body);
 
     user.save(function(err) {
@@ -72,7 +73,7 @@ exports.renderSignup = function(req, res, next) {
     if (!req.user) {
         res.render('signup', {
             title: 'Sign up today',
-            messages: req.flash('error')
+            messages: {}
         });
     } else {
     return res.redirect('/');
@@ -85,13 +86,20 @@ exports.signup = function(req, res, next) {
         user.provider = 'local';
         user.save(function(err) {
             if (err) {
-                req.flash('error', err);
-                return res.redirect('/signup');
+                res.render('signup', {
+                    title: 'Sign up today',
+                    messages: err
+                });
             }
-            req.login(user, function(err) {
-                if (err) return next(err);
-                return res.redirect('/');
-            });
+            else {
+                req.login(user, function(err) {
+                    if (err) {
+                        return next(err);
+                    } else {
+                        return res.redirect('/');
+                    }
+                });
+            }
         });
     } else {
         return res.redirect('/');

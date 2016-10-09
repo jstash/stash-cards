@@ -14,7 +14,6 @@ module.exports = function(app) {
         .put(users.updateUser)
         .delete(users.deleteUser);
 
-
     app.route('/signup')
         .get(users.renderSignup)
         .post(users.signup);

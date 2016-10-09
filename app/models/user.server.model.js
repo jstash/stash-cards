@@ -15,7 +15,7 @@ var UserSchema = new mongoose.Schema({
     },
     email: {
         type: String,
-        match: [/.+\@.+\..+/, 'Email address is invalid format'],
+        match: [/.+\@.+\..+/, 'Email address is in an invalid format'],
         required: true,
         unique: true
     },
