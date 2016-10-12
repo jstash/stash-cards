@@ -3,19 +3,6 @@
 var User = require('mongoose').model('User'),
     passport = require('passport');
 
-exports.createUser = function(req, res, next) {
-  console.log('in createUser');
-    var user = new User(req.body);
-
-    user.save(function(err) {
-        if(err) {
-            return next(err);
-        } else {
-            res.json(user);
-        }
-    });
-};
-
 exports.readUser = function (req, res, next) {
     User.findOne({_id: id }, function(err, user) {
         if(err) {
@@ -82,6 +69,8 @@ exports.renderSignup = function(req, res, next) {
 exports.signup = function(req, res, next) {
     if (!req.user) {
         var user = new User(req.body);
+        console.log("USER FORMAT");
+        console.log(user);
         var message = null;
         user.provider = 'local';
         user.save(function(err) {

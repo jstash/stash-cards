@@ -13,8 +13,6 @@ describe('Deck Controller Unit Tests:', function() {
     });
 
     afterEach(function (done) {
-
-
         done();
     });
 });

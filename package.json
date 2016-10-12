@@ -31,6 +31,6 @@
   },
   "devDependencies": {
     "should": "~4.0.4",
-    "supertest": "~0.13.0"
+    "supertest": "^2.0.0"
   }
 }

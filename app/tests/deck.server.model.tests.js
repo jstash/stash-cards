@@ -28,13 +28,10 @@ describe('Deck Model Unit Tests:', function() {
                 }
             ]
         });
-
         done();
-
     });
 
     describe('Testing the save method', function () {
-
         it('Should be able to save a new deck', function (done) {
             deck.save(function (err) {
                 should.not.exist(err);
@@ -64,23 +61,19 @@ describe('Deck Model Unit Tests:', function() {
         });
 
         it('Should be able to remove a card from a deck', function (done) {
-
             deck.save(function (err) {
                 should.not.exist(err);
                 deck = Deck.findOne(function(err, mydeck) {
                     should.not.exist(err);
                     should(mydeck.cards).have.length(2);
-
                     mydeck.cards.splice(1,1);
                     mydeck.save(function (err) {
                         should.not.exist(err);
+                        mydeck.cards.should.have.length(1);
+                        done();
                     });
-                    mydeck.cards.should.have.length(1);
-                    done();
                 });          
             });  
-
-
         });
     });
 
@@ -92,10 +85,8 @@ describe('Deck Model Unit Tests:', function() {
                     should.not.exist(err);
                     myDeck.remove(function(err) {
                         should.not.exist(err);
-                        Deck.count(function (err, c) {
-                            should(c).be.equal(0);
-                            done();
-                        });
+                        done();
+
                     });
                 });
             });
@@ -103,12 +94,11 @@ describe('Deck Model Unit Tests:', function() {
     });
 
     afterEach(function (done) {
-
-
         if(deck) {
             deck.remove(function(err) {
                 if(err) {
                     console.log(err);
+                    done();
                 }
             });
         }

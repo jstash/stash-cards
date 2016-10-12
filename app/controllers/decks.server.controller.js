@@ -15,7 +15,6 @@ exports.createDeck = function(req, res, next) {
 };
 
 exports.readDeck = function (req, res, next) {
-
     Deck.findOne({_id: req.params.cardId }, function(err, deck) {
         if(err) {
             return next(err);

@@ -179,10 +179,7 @@ describe('User Model Unit Tests:', function() {
                     should.exist(myUser);
                     User.remove({'name':'012345'}, function(err) {
                         should.not.exist(err);
-                        User.count(function (err, c) {
-                            should(c).be.equal(0);
-                            done();
-                        });
+                        done();
                     });
                 });
             });

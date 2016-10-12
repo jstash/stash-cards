@@ -9,15 +9,48 @@ var user1, user2, user3;
 describe('User Controller Unit Tests:', function() {
 
     beforeEach(function (done) {
-
         done();
     });
 
-    // @TODO: When user validation is in place will add tests for the user controller.
+    describe('GET /api/users', function() {
+        it('should get user list', function(done) {
+            request(app)
+                .get('/api/users')
+                .set('Accept', 'application/json')
+                .expect(200, done);
+        });
 
-    afterEach(function (done) {
+    });
 
+    describe('GET /api/users/:userId', function() {
 
-        done();
+    });
+
+    describe('PUT /api/users/:userId', function() {
+
+    });
+
+    describe('DELETE /api/users/:userId', function() {
+
+    });
+
+    describe('GET /signup', function() {
+
+    });
+
+    describe('POST /signup', function() {
+
+    });
+
+    describe('GET /signin', function() {
+
+    });
+
+    describe('POST /signin', function() {
+
+    });
+
+    describe('GET /signout', function() {
+
     });
 });
