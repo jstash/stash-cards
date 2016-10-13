@@ -60,7 +60,7 @@ exports.renderSignup = function(req, res, next) {
     if (!req.user) {
         res.render('signup', {
             title: 'Sign up today',
-            messages: {}
+            err: {}
         });
     } else {
     return res.redirect('/');
@@ -69,27 +69,42 @@ exports.renderSignup = function(req, res, next) {
 exports.signup = function(req, res, next) {
     if (!req.user) {
         var user = new User(req.body);
-        console.log("USER FORMAT");
-        console.log(user);
-        var message = null;
         user.provider = 'local';
-        user.save(function(err) {
-            if (err) {
-                res.render('signup', {
+
+        if(req.body.password != req.body.password_verification) {
+            res.render('signup', {
                     title: 'Sign up today',
-                    messages: err
-                });
-            }
-            else {
-                req.login(user, function(err) {
-                    if (err) {
-                        return next(err);
-                    } else {
-                        return res.redirect('/');
+                    err: {password_verification: "Passwords do not match"}
+            });
+        }
+        else {
+            user.save(function(err) {
+                if (err) {
+                    var errState = { }
+                    var signupState = {
+                        title: 'Sign up today',
+                        err: errState
+                    };
+                    if(err.errors) {
+                        for (var field in err.errors) {
+                            errState[field] = err.errors[field].message;
+                        }
                     }
-                });
-            }
-        });
+                
+                    res.render('signup', signupState);
+                }
+                else {
+                    req.login(user, function(err) {
+                        if (err) {
+                            return next(err);
+                        } else {
+                            return res.redirect('/');
+                        }
+                    });
+                }
+            });    
+        } 
+
     } else {
         return res.redirect('/');
     }
