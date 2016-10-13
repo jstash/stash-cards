@@ -27,7 +27,10 @@
     "mongoose": "^4.1.7",
     "morgan": "^1.6.1",
     "passport": "~0.2.1",
-    "passport-local": "^1.0.0"
+    "passport-local": "^1.0.0",
+    "react": "^15.3.2",
+    "react-redux": "^4.4.5",
+    "redux": "^3.6.0"
   },
   "devDependencies": {
     "should": "~4.0.4",

@@ -1,15 +1,19 @@
 'use strict';
 
-var users = require('../../app/controllers/decks.server.controller');
+var decks = require('../../app/controllers/decks.server.controller');
 
 module.exports = function(app) {
 
-    // Create a new deck
-    // Add a card to a deck
-    // Read a card from a deck
+    app.route('/api/decks/:deckId')
     // Read a whole deck
-    // Update a card in a deck
-    // Remove a card in a deck
-    // Update some field inside of the deck.
-
+        .get(decks.readDeck)
+    // Updates  deck
+        .put(decks.updateDeck)
+    // Deletes a deck
+        .delete(decks.deleteDeck)
+    // Create a new deck
+        .post(decks.createDeck);
+    app.route('/api/decks/')
+    // Read the full list of decks
+        .get(decks.readDeckList);
 }

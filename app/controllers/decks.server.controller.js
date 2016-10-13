@@ -15,7 +15,7 @@ exports.createDeck = function(req, res, next) {
 };
 
 exports.readDeck = function (req, res, next) {
-    Deck.findOne({_id: req.params.cardId }, function(err, deck) {
+    Deck.findOne({_id: req.params.deckId }, function(err, deck) {
         if(err) {
             return next(err);
         } else {
@@ -25,7 +25,7 @@ exports.readDeck = function (req, res, next) {
 };
 
 exports.readDeckList = function(req, res, next) {
-    Deck.find({}, function(err, decks) {
+    Deck.find({}, {title: 1, description: 1, _id: 0}, function(err, decks) {
         if(err) {
             return next(err);
         } else {
