@@ -4,11 +4,18 @@ var User = require('mongoose').model('User'),
     passport = require('passport');
 
 exports.readUser = function (req, res, next) {
-    User.findOne({_id: id }, function(err, user) {
+    User.findOne({name: req.params.userId }, function(err, user) {
         if(err) {
+            console.log('error in readUser');
             return next(err);
         } else {
-            req.user = user;
+            if(user) {
+                res.json(user);
+            } else {
+                return res.status(404).send({
+                    message: 'User does not exist'
+                });
+            }
             next();
         }
     });
@@ -25,11 +32,11 @@ exports.readUserList = function(req, res, next) {
 };
 
 exports.updateUser = function(req, res, next) {
-    User.findByIdAndUpdate(req.user.id, req.body, function(err, user) {
-        if(err) {
-            return next(err);
+    User.findOneAndUpdate({name: req.body.name}, req.body, {passRawResult: true}, function(err, doc, raw) {
+        if(!raw.lastErrorObject.updatedExisting) {
+            res.status(400).end();
         } else {
-            res.json(user);
+            res.status(200).end();
         }
     });
 };
@@ -90,7 +97,6 @@ exports.signup = function(req, res, next) {
                             errState[field] = err.errors[field].message;
                         }
                     }
-                
                     res.render('signup', signupState);
                 }
                 else {
@@ -102,9 +108,8 @@ exports.signup = function(req, res, next) {
                         }
                     });
                 }
-            });    
-        } 
-
+            });
+        }
     } else {
         return res.redirect('/');
     }
